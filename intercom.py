@@ -8,7 +8,10 @@ class InterCom:
     def __init__(self):
         config = configparser.ConfigParser()
         config.read('intercom.ini')
-        self.mumble_client = MumbleClient()
+        self.mumble_client = MumbleClient(
+            config['mumbleclient']['host'],
+            config['mumbleclient']['user'],
+            config['mumbleclient']['channel'])
         self.exit = False
 
     def run(self):
