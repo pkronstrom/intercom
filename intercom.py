@@ -1,6 +1,6 @@
 import configparser
 import time
-import RPIO as GPIO
+import RPi.GPIO as GPIO
 
 from client import MumbleClient
 
@@ -12,6 +12,7 @@ class InterCom:
         self.mumble_client = MumbleClient(config['mumbleclient'])
         self.exit = False
         self.send_input = False
+
 
         if config['general']['gpiotype'] == 'BCM':
             GPIO.setmode(GPIO.BCM)
@@ -25,4 +26,9 @@ class InterCom:
                 self.mumble_client.send_input_audio()
 
 if __name__ == '__main__':
-    InterCom().run()
+    try:
+        InterCom().run()
+    except Exception as e:
+        raise e
+    finally:
+        GPIO.cleanup()
