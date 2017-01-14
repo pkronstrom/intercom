@@ -10,10 +10,12 @@ class InterCom:
         config.read('intercom.ini')
         self.mumble_client = MumbleClient(config['mumbleclient'])
         self.exit = False
+        self.send_input = False
 
     def run(self):
         while not self.exit:
-            self.mumble_client.send_input_audio()
+            if self.send_input:
+                self.mumble_client.send_input_audio()
 
 if __name__ == '__main__':
     InterCom().run()
