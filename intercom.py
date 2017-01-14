@@ -9,9 +9,9 @@ class InterCom:
         config = configparser.ConfigParser()
         config.read('intercom.ini')
         self.mumble_client = MumbleClient(
-            config['mumbleclient']['host'],
-            config['mumbleclient']['user'],
-            config['mumbleclient']['channel'])
+            config.get('mumbleclient', 'host'),
+            config.get('mumbleclient', 'user'),
+            config.get('mumbleclient', 'channel'))
         self.exit = False
 
     def run(self):
