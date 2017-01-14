@@ -2,7 +2,7 @@ from pymumble.pymumble_py3 import Mumble, constants
 import alsaaudio
 
 class MumbleClient:
-    def __init__(self, host, user, channel):
+    def __init__(self, host, user, channel, card = 'plughw:1'):
         self.mumble = Mumble(host, user, debug=False)
         self.mumble.start()
         self.mumble.is_ready()
@@ -22,9 +22,22 @@ class MumbleClient:
         self.device.setformat(alsaaudio.PCM_FORMAT_S16_LE)  # sample format
         self.device.setperiodsize(1920)
 
+        self.input = alsaaudio.PCM(alsaaudio.PCM_CAPTURE, alsaaudio.PCM_NONBLOCK, card)
+
+        # Set attributes: Mono, 44100 Hz, 16 bit little endian samples
+        self.input.setchannels(1)
+        self.input.setrate(48000)
+        self.input.setformat(alsaaudio.PCM_FORMAT_S16_LE)
+        self.input.setperiodsize(1920)
+
     def send_audio_chunk(self, audio_chunk):
         self.mumble.sound_output.add_sound(audio_chunk)
 
-
     def play_sound(self, info, sound_chunk):
         self.device.write(sound_chunk.pcm)
+
+    def handle_loop(self):
+        length, data = self.input.read()
+
+        if length:
+            self.send_audio_chunk(data)
