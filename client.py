@@ -38,6 +38,9 @@ class MumbleClient:
     def play_sound(self, info, sound_chunk):
         self.output_device.write(sound_chunk.pcm)
 
+    def clear_input(self):
+        self.input_device.read()
+
     def send_input_audio(self):
         length, data = self.input_device.read()
 
