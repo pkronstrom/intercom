@@ -10,7 +10,7 @@ class MumbleClient:
         self.mumble.set_receive_sound(True)
         self.mumble.users.myself.unmute()
 
-        self.mumble.channels.find_by_name(channel).move_in()
+        self.mumble.channels.find_by_name(config['channel']).move_in()
         self.mumble.set_bandwidth(200000)
 
         self.mumble.callbacks.set_callback(
