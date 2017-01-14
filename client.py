@@ -18,7 +18,7 @@ class MumbleClient:
 
         # setup sound output
         self.device = alsaaudio.PCM(mode=alsaaudio.PCM_NONBLOCK,
-            config.getint('output')
+            config.getint('output'))
         self.device.setchannels(1)  # use only one channel of audio (aka mono)
         self.device.setrate(48000)  # how many samples per second
         self.device.setformat(alsaaudio.PCM_FORMAT_S16_LE)  # sample format
@@ -38,7 +38,7 @@ class MumbleClient:
     def play_sound(self, info, sound_chunk):
         self.device.write(sound_chunk.pcm)
 
-    def handle_loop(self):
+    def send_input_audio(self):
         length, data = self.input.read()
 
         if length:
