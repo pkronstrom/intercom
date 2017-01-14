@@ -14,7 +14,6 @@ class InterCom:
     def run(self):
         while not self.exit:
             self.mumble_client.send_input_audio()
-            time.sleep(0.01)
 
 if __name__ == '__main__':
     InterCom().run()
