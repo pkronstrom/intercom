@@ -16,20 +16,20 @@ class MumbleClient:
         self.mumble.callbacks.set_callback(
             constants.PYMUMBLE_CLBK_SOUNDRECEIVED, self.play_sound)
 
-        self.device = alsaaudio.PCM(
+        self.output_device = alsaaudio.PCM(
             alsaaudio.PCM_PLAYBACK, alsaaudio.PCM_NONBLOCK, config['output'])
-        self.device.setchannels(1)
-        self.device.setrate(48000)
-        self.device.setformat(alsaaudio.PCM_FORMAT_S16_LE)
-        self.device.setperiodsize(1920)
+        self.output_device.setchannels(1)
+        self.output_device.setrate(48000)
+        self.output_device.setformat(alsaaudio.PCM_FORMAT_S16_LE)
+        self.output_device.setperiodsize(1920)
 
-        self.input = alsaaudio.PCM(
+        self.input_device = alsaaudio.PCM(
             alsaaudio.PCM_CAPTURE, alsaaudio.PCM_NONBLOCK, config['input'])
 
-        self.input.setchannels(1)
-        self.input.setrate(48000)
-        self.input.setformat(alsaaudio.PCM_FORMAT_S16_LE)
-        self.input.setperiodsize(1920)
+        self.input_device.setchannels(1)
+        self.input_device.setrate(48000)
+        self.input_device.setformat(alsaaudio.PCM_FORMAT_S16_LE)
+        self.input_device.setperiodsize(1920)
 
     def send_audio_chunk(self, audio_chunk):
         self.mumble.sound_output.add_sound(audio_chunk)
@@ -38,7 +38,7 @@ class MumbleClient:
         self.device.write(sound_chunk.pcm)
 
     def send_input_audio(self):
-        length, data = self.input.read()
+        length, data = self.input_device.read()
 
         if length:
             self.send_audio_chunk(data)
