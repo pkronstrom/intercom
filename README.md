@@ -53,3 +53,8 @@ Mumble server should now start automatically upon restart
 RPi.GPIO requires admin rights, so we need to run the intercom server as root.
 Make a copy of the settings file `cp intercom.ini.example intercom.ini` and modify it before running the server.
 The server can be started by calling `sudo python3 intercom.py`.
+
+# Links
+- [pymumble](https://github.com/azlux/pymumble)
+- [pyalsaaudio](http://larsimmisch.github.io/pyalsaaudio)
+- [RPi.GPIO](https://pypi.python.org/pypi/RPi.GPIO)
