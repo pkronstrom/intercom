@@ -2,7 +2,7 @@ from pymumble.pymumble_py3 import Mumble, constants
 import alsaaudio
 
 class MumbleClient:
-    def __init__(self, host, config):
+    def __init__(self, config):
         self.mumble = Mumble(config['host'], config['user'], debug=False)
         self.mumble.start()
         self.mumble.is_ready()
