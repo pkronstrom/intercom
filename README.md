@@ -20,6 +20,7 @@ Restart `sudo /etc/init.d/mumble-server restart`
 - `sudo pip3 install virtualenv`
 - `virtualenv -p /usr/bin/python3 venv`
 - `source venv/bin/activate`
+- `sudo apt-get install libsound2-dev`
 
 - `(git submodule update --recursive)`
 - `cd pymumble`
