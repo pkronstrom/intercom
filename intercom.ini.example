@@ -1,4 +1,13 @@
 [mumbleclient]
 host = 127.0.0.1
-user = some-user
+user = someuser
 channel = Mumble Server
+output = plughw:1
+input = plughw:1
+bitrate = 48000
+periodsize = 1920
+# Mono, pymumble propably does not support stereo
+channels = 1
+bandwith = 200000
+# Debug 0 or 1
+debug = 0
