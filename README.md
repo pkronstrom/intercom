@@ -29,3 +29,6 @@ Restart `sudo /etc/init.d/mumble-server restart`
 
 ### Install Opus Library
 - sudo apt-get install libopus-dev
+
+### Running
+Run as root (GPIO)
