@@ -16,12 +16,11 @@ class MumbleClient:
         self.mumble.callbacks.set_callback(
             constants.PYMUMBLE_CLBK_SOUNDRECEIVED, self.play_sound)
 
-        # setup sound output
         self.device = alsaaudio.PCM(
             alsaaudio.PCM_PLAYBACK, alsaaudio.PCM_NONBLOCK, config['output'])
-        self.device.setchannels(1)  # use only one channel of audio (aka mono)
-        self.device.setrate(48000)  # how many samples per second
-        self.device.setformat(alsaaudio.PCM_FORMAT_S16_LE)  # sample format
+        self.device.setchannels(1)
+        self.device.setrate(48000)
+        self.device.setformat(alsaaudio.PCM_FORMAT_S16_LE)
         self.device.setperiodsize(1920)
 
         self.input = alsaaudio.PCM(
