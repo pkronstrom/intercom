@@ -2,8 +2,8 @@ from pymumble.pymumble_py3 import Mumble, constants
 import alsaaudio
 
 class MumbleClient:
-    def __init__(self, host, user, channel, card = 'plughw:1'):
-        self.mumble = Mumble(host, user, debug=False)
+    def __init__(self, host, config):
+        self.mumble = Mumble(config['host'], config['user'], debug=False)
         self.mumble.start()
         self.mumble.is_ready()
 
@@ -13,18 +13,20 @@ class MumbleClient:
         self.mumble.channels.find_by_name(channel).move_in()
         self.mumble.set_bandwidth(200000)
 
-        self.mumble.callbacks.set_callback(constants.PYMUMBLE_CLBK_SOUNDRECEIVED, self.play_sound)
+        self.mumble.callbacks.set_callback(
+            constants.PYMUMBLE_CLBK_SOUNDRECEIVED, self.play_sound)
 
         # setup sound output
-        self.device = alsaaudio.PCM(mode=alsaaudio.PCM_NONBLOCK, cardindex=0)
+        self.device = alsaaudio.PCM(mode=alsaaudio.PCM_NONBLOCK,
+            config.getint('output')
         self.device.setchannels(1)  # use only one channel of audio (aka mono)
         self.device.setrate(48000)  # how many samples per second
         self.device.setformat(alsaaudio.PCM_FORMAT_S16_LE)  # sample format
         self.device.setperiodsize(1920)
 
-        self.input = alsaaudio.PCM(alsaaudio.PCM_CAPTURE, alsaaudio.PCM_NONBLOCK, card)
+        self.input = alsaaudio.PCM(alsaaudio.PCM_CAPTURE,
+            alsaaudio.PCM_NONBLOCK, config['input'])
 
-        # Set attributes: Mono, 44100 Hz, 16 bit little endian samples
         self.input.setchannels(1)
         self.input.setrate(48000)
         self.input.setformat(alsaaudio.PCM_FORMAT_S16_LE)
