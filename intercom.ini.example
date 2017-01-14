@@ -1,4 +1,4 @@
 [mumbleclient]
-host = '127.0.0.1'
-user = 'some-user'
-channel = 'Mumble Server'
+host = 127.0.0.1
+user = some-user
+channel = Mumble Server
