@@ -11,5 +11,7 @@ channels = 1
 bandwith = 200000
 # Debug 0 or 1
 debug = 0
+
+[general]
 button = 4
 gpiotype = BCM
