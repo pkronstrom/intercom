@@ -21,7 +21,7 @@ The installation procedure assumes a Raspbian Wheezy or similar OS.
 Everything is done via command line.
 
 ## Install dependencies
-- install dependencies `sudo apt-get install git python3-dev python3-pip libsound2-dev libopus-dev`
+- install dependencies `sudo apt-get install git python3-dev python3-pip libasound2-dev libopus-dev`
 
 ## Install a mumble server
 
